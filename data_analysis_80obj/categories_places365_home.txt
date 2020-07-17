@@ -1,0 +1,7 @@
+/b/bathroom 0
+/b/bedroom 1
+/c/corridor 2
+/d/dining_room 3
+/k/kitchen 4
+/l/living_room 5
+/o/office 6
