@@ -1,15 +1,15 @@
 # Learning Discriminative Object Pairs for Scene Understanding
 
-This is the implementation of our paper:
+The repository is the implementation of paper:
 
-Liguang Zhou, Jun Cen, Zhenglong Sun,Tin Lun Lam, “**Learning Discriminative Object Pairs for Scene Understanding**,” in Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), Las Vegas, USA, Oct. 2020.
+Liguang Zhou, Jun Cen, Zhenglong Sun,Tin Lun Lam, Yangsheng Xu. “**Learning Discriminative Object Pair Relation for Scene Understanding**,” Under Review, 2020
 
 ## Environment
 
 1. The code has been implemented and tested on Ubuntu 16.04, python 3.6.5, PyTorch 1.1.0 (tested on NVIDIA Titan Xp with CUDA 9.0.176)
 3. Clone the repository as:
 ```
-git clone https://github.com/Jun-CEN/COPM.git
+git@github.com:hszhoushen/dopm.git
 ```
 
 ## Data
