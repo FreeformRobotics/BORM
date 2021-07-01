@@ -1,15 +1,15 @@
-# Learning Discriminative Object Pairs for Scene Understanding
+# BORM: Bayesian Object Relation Model for Indoor Scene Recognition  
 
 The repository is the implementation of paper:
 
-Liguang Zhou, Jun Cen, Xingchao Wang, Zhenglong Sun,Tin Lun Lam, Yangsheng Xu. “**Learning Discriminative Object Pair Relation for Scene Understanding**,” Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),  Prague, Czech Republic (Virtual), 2021
+Liguang Zhou, Jun Cen, Xingchao Wang, Zhenglong Sun, Tin Lun Lam, Yangsheng Xu. “**BORM: Bayesian Object Relation Model for Indoor Scene Recognition  **,” Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),  Prague, Czech Republic (Virtual),  September 27 - October 1, 2021
 
 ## Environment
 
 1. The code has been implemented and tested on Ubuntu 16.04, python 3.6.5, PyTorch 1.1.0 (tested on NVIDIA Titan Xp with CUDA 9.0.176)
 3. Clone the repository as:
 ```
-git@github.com:hszhoushen/dopm.git
+git@github.com:hszhoushen/borm.git
 ```
 
 ## Data
