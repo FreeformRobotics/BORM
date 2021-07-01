@@ -2,7 +2,7 @@
 
 The repository is the implementation of paper:
 
-Liguang Zhou, Jun Cen, Zhenglong Sun,Tin Lun Lam, Yangsheng Xu. “**Learning Discriminative Object Pair Relation for Scene Understanding**,” Under Review, 2020
+Liguang Zhou, Jun Cen, Xingchao Wang, Zhenglong Sun,Tin Lun Lam, Yangsheng Xu. “**Learning Discriminative Object Pair Relation for Scene Understanding**,” Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),  Prague, Czech Republic (Virtual), 2021
 
 ## Environment
 
