@@ -2,7 +2,7 @@
 
 The repository is the implementation of paper:
 
-Liguang Zhou, Jun Cen, Xingchao Wang, Zhenglong Sun, Tin Lun Lam, Yangsheng Xu. “**BORM: Bayesian Object Relation Model for Indoor Scene Recognition  **,” Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),  Prague, Czech Republic (Virtual),  September 27 - October 1, 2021
+Liguang Zhou, Jun Cen, Xingchao Wang, Zhenglong Sun, Tin Lun Lam, Yangsheng Xu. “**BORM: Bayesian Object Relation Model for Indoor Scene Recognition**,” Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),  Prague, Czech Republic (Virtual),  September 27 - October 1, 2021
 
 ## Environment
 
