@@ -18,7 +18,7 @@ class DatasetSelection(object):
 
     def discriminative_matrix_estimation(self):
         # create p_o_c matrix
-        if(self.dataset_name == 'Places365-7'):
+        if(self.dataset_name == 'Places365-7' or self.dataset_name == 'sun'):
             fileName = './object_information/150obj_result_Places365_7.npy'
             self.num_sp = np.load(fileName)
             fileName = './object_information/150obj_number_Places365_7.npy'
@@ -71,32 +71,52 @@ class DatasetSelection(object):
         if(self.dataset_name == 'Places365-7'):
             # load the dictionary which contains objects for every image in dataset
             one_hot = self.load_dict('object_information/150obj_Places365_7.json')
-            # Data loading code
+            # Data directory
             data_dir = '/data/cenj/places365_train'
+            # class information
+            file_name = './object_information/categories_Places365_7.txt'
+            classes = list()
+            with open(file_name) as class_file:
+                for line in class_file:
+                    classes.append(line.strip().split(' ')[0][3:])
+            classes = tuple(classes)
+
 
         elif(self.dataset_name == 'Places365-14'):
             # load the dictionary which contains objects for every image in dataset
             one_hot = self.load_dict('object_information/150obj_Places365_14.json')
-            # Data loading code
+            # Data directory
             data_dir = '/data/cenj/places365_train_2'
+            # class information
+            file_name = './object_information/categories_Places365_14.txt'
+            classes = list()
+            with open(file_name) as class_file:
+                for line in class_file:
+                    classes.append(line.strip().split(' ')[0][3:])
+            classes = tuple(classes)
 
-            # create model
-            model_arch = 'resnet50'
-            print("=> creating model '{}'".format(model_arch))
-            model_file='./weights/resnet50_best_res50.pth.tar'
-            model = models.__dict__[model_arch](num_classes=14)
-            checkpoint = torch.load(model_file)
-            state_dict = {str.replace(k,'module.',''): v for k,v in checkpoint['state_dict'].items()}
-            model.load_state_dict(state_dict)
-            model.cuda()
-            for param in model.parameters():
-                param.requires_grad = False
-            print(model)
+
+
 
         elif(self.dataset_name == 'sun'):
-            valdir = os.path.join(data_dir, 'test')
+            # load the dictionary which contains objects for every image in dataset
+            one_hot = self.load_dict('object_information/150obj_7classes_SUN.json')
+            # Data directory
+            data_dir = '/data/cenj/SUNRGBD/'
+            # class information
+            file_name = './object_information/categories_Places365_7.txt'
+            classes = list()
+            with open(file_name) as class_file:
+                for line in class_file:
+                    classes.append(line.strip().split(' ')[0][3:])
+            classes = tuple(classes)
 
-        return one_hot, data_dir, model
+        # elif(args.dataset == 'vpc'):
+        #     data_dir = vpc_dir
+        #     home_dir = os.path.join(data_dir, 'data_'+args.hometype)
+        #     valdir = os.path.join(home_dir,args.floortype)
+
+        return one_hot, data_dir, classes
 
 class ImageFolderWithPaths(datasets.ImageFolder):
         """Custom dataset that includes image file paths. Extends

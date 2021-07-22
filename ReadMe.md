@@ -1,8 +1,8 @@
 # BORM: Bayesian Object Relation Model for Indoor Scene Recognition  
 
-The repository is the implementation of paper:
+The repository is the Pytorch implementation of IROS2021 paper: 
 
-Liguang Zhou, Jun Cen, Xingchao Wang, Zhenglong Sun, Tin Lun Lam, Yangsheng Xu. “**BORM: Bayesian Object Relation Model for Indoor Scene Recognition**,” Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),  Prague, Czech Republic (Virtual),  September 27 - October 1, 2021
+"BORM: Bayesian Object Relation Model for Indoor Scene Recognition"
 
 ## Environment
 
@@ -12,7 +12,7 @@ Liguang Zhou, Jun Cen, Xingchao Wang, Zhenglong Sun, Tin Lun Lam, Yangsheng Xu. 
 git@github.com:hszhoushen/borm.git
 ```
 
-## Data
+## Dataset 
 
 1. Places365_7classes: The train/test splits can be found in /data/cenj/places365_train.
 2. Places365_14classes: The train/test splits can be found in /data/cenj/places365_train_2.
@@ -32,116 +32,68 @@ To get 150 classes .json file, please enter `/150obj` and run
 
 ## Training
 
-For 7 classes, please enter `/RAIL_7classes`. For 14 classes, please enter `/RAIL_14classes`.
-
-For the OM-80 model, please run
-```
-    python train_80obj.py
-```
-
-For the OPM-80 model, please run
-```
-    python train_80obj_joint.py
-```
-
-For the OM-150 model, please run
+For the Places365-7 dataset, please execute the following commands
 
 ```
-    python train_150obj.py
+CUDA_VISIBLE_DEVICES=0 python train_cdopm_resnet50.py  --dataset Places365-7 --num_classes 7 --om_type cdopm_resnet18
 ```
 
-For the OPM-150 model, please run
+For the Places365-14 dataset, please execute the following commands
 
 ```
-    python train_150obj_joint.py
+CUDA_VISIBLE_DEVICES=0 python train_cdopm_resnet50.py  --dataset Places365-14 --num_classes 14 --om_type cdopm_resnet50 --batch-size 64 
 ```
 
-For the COPM-80 model, please run
+## Evaluation
+
+For the Places365-7 dataset, please execute the following commands
 
 ```
-    python train_combined_80obj_joint.py
+CUDA_VISIBLE_DEVICES=0 python test_cdopm_resnet50.py  --dataset Places365-7 --num_classes 7 --om_type cdopm_resnet18
 ```
 
-For the COM-150 model, please run
+For the Places365-14 dataset, please execute the following commands
 
 ```
-    python train_combined_150obj.py
+CUDA_VISIBLE_DEVICES=0 python test_cdopm_resnet50.py  --dataset Places365-14 --num_classes 14 --om_type cdopm_resnet50 --batch-size 64 
 ```
 
-For the COPM-150 model, please run
+For the SUNRGBD dataset, please execute the following commands 
 
 ```
-    python train_combined_150obj_joint.py
+CUDA_VISIBLE_DEVICES=0 python test_cdopm_resnet50.py --om_type cdopm_resnet18 --dataset sun --num_classes 7
 ```
 
-For the DOPM-80 model, please enter `/data_analysis_80obj` and run
+## Pre-trained model
+
+Pretrained model is uploaded to the google driver.
+
+## Reference
+
+If you find the paper or code or pre-trained models useful, please cite the following papers:
 
 ```
-    python train_80obj_joint_dis.py
+@InProceedings{Zhou21borm,
+  author     = {Liguang Zhou and Cen Jun and Xingchao Wang and Zhenglong Sun and Tin Lun Lam and Yangsheng Xu},
+  title      = {BORM: Bayesian Object Relation Model for Indoor Scene Recognition},
+  booktitle  = {IEEE/RSJ International Conference on Intelligent Robots and Systems},
+  year       = {2021},
+  organization={IEEE}
+}
 ```
 
-For the DOPM-150 model, please enter `/data_analysis_150obj` and run
+
 
 ```
-    python train_150obj_joint_dis.py
+@InProceedings{Miao2021ots,
+  author    = {Bo Miao and Liguang Zhou and Ajmal Mian and Tin Lun Lam and Yangsheng Xu},
+  title     = {Object-to-Scene: Learning to Transfer Object Knowledge to Indoor Scene Recognition},
+  booktitle = {2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2021},
+  organization={IEEE}
+}
 ```
 
-## Evaluation on image datasets
 
-For 7 classes, please enter `/RAIL_7classes`. For 14 classes, please enter `/RAIL_14classes`.
 
-For the OM-80 model, please run
-
-```
-    python test_80obj.py
-```
-
-For the OPM-80 model, please run
-
-```
-    python test_80obj_joint.py
-```
-
-For the OM-150 model, please run
-
-```
-    python test_150obj.py
-```
-
-For the OPM-150 model, please run
-
-```
-    python test_150obj_joint.py
-```
-
-For the COPM-80 model, please run
-
-```
-    python test_combined_80obj_joint.py
-```
-
-For the COM-150 model, please run
-
-```
-    python test_combined_150obj.py
-```
-
-For the COPM-150 model, please run
-
-```
-    python test_combined_150obj_joint.py
-```
-
-For the DOPM-80 model, please enter `/data_analysis_80obj` and run
-
-```
-    python test_80obj_joint_dis.py
-```
-
-For the DOPM-150 model, please enter `/data_analysis_150obj` and run
-
-```
-    python test_150obj_joint_dis.py
-```
-
-To inference SUNRGBD dataset, just change the dataset route in corresponding python file.
+ 

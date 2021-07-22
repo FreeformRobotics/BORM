@@ -20,11 +20,10 @@ import json
 import datetime
 import numpy as np
 
-from model import Object_Linear, Object_IOM, LinClassifier, LinClassifier_CIOM
+from model import Object_CDOPM_ResNet18, Object_CDOPM_ResNet50, Object_IOM, Fusion_CDOPM_ResNet50, Fusion_CIOM, Fusion_CDOPM_ResNet18
 from arguments import arguments_parse
 from dataset import ImageFolderWithPaths, DatasetSelection
 
-# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 best_prec1 = 0
 
@@ -45,18 +44,51 @@ def main():
     # create the model for training
     if args.om_type == 'ciom_resnet50':
         object_idt = Object_IOM()
-        classifier = LinClassifier_CIOM(args.num_classes)
+        classifier = Fusion_CIOM(args.num_classes)
 
-    else:
-        object_idt = Object_Linear()
-        classifier = LinClassifier(args.num_classes)
+    elif args.om_type == 'cdopm_resnet18':
+        model_dir = './weights'
+        model_arch = 'resnet18'
+        object_idt = Object_CDOPM_ResNet18()
+        classifier = Fusion_CDOPM_ResNet18(args.num_classes)
+        # load the resnet18 checkpoint pretrained over the place365
+        print("=> creating model '{}'".format(model_arch))
+        model_file = os.path.join(model_dir, 'resnet18_places365.pth.tar')
+
+        # pretrained on the place365
+        model = models.__dict__['resnet18'](num_classes=365)
+        checkpoint = torch.load(model_file)
+
+        state_dict = {str.replace(k, 'module.', ''): v for k, v in checkpoint['state_dict'].items()}
+        model.load_state_dict(state_dict)
+        model.cuda()
+
+        for param in model.parameters():
+            param.requires_grad = True
+        print(model)
+
+    elif args.om_type == 'cdopm_resnet50':
+        object_idt = Object_CDOPM_ResNet50()
+        classifier = Fusion_CDOPM_ResNet50(args.num_classes)
+
+        model_arch = 'resnet50'
+        print("=> creating model '{}'".format(model_arch))
+        # model_file='./weights/resnet50_best_res50.pth.tar'
+        model_file = './weights/resnet50_best_res50.pth.tar'
+        model = models.__dict__[model_arch](num_classes=14)
+        checkpoint = torch.load(model_file)
+        state_dict = {str.replace(k, 'module.', ''): v for k, v in checkpoint['state_dict'].items()}
+        model.load_state_dict(state_dict)
+        model.cuda()
+        for param in model.parameters():
+            param.requires_grad = True
+        print(model)
 
     object_idt.cuda()
     classifier.cuda()
     # object_idt = torch.nn.DataParallel(object_idt).cuda()
     # classifier = torch.nn.DataParallel(classifier).cuda()
 
-    # best model name and latest model name
     latest_model_name =  './weights/' + args.om_type + '_latest' + '.pth.tar'
     best_model_name = './weights/' + args.om_type + '_best' + '.pth.tar'
 
@@ -193,7 +225,7 @@ def train(train_loader, model, one_hot, object_idt, classifier, criterion, optim
                 object_pair_matrix = np.dot(column,row)
                 obj_hot_vector = object_pair_matrix.reshape(22500).tolist()
 
-            elif args.om_type == 'cdopm_resnet50':
+            elif args.om_type == 'cdopm_resnet50' or args.om_type == 'cdopm_resnet18':
                 row = np.array(row)
                 row = row.reshape(1,row.shape[0])
                 column = row.T
@@ -274,7 +306,7 @@ def validate(val_loader, model, one_hot, object_idt, classifier, criterion):
                     object_pair_matrix = np.dot(column,row)
                     obj_hot_vector = object_pair_matrix.reshape(22500).tolist()
 
-                elif args.om_type == 'cdopm_resnet50':
+                elif args.om_type == 'cdopm_resnet50' or args.om_type == 'cdopm_resnet18':
                     row = np.array(row)
                     row = row.reshape(1,row.shape[0])
                     column = row.T
