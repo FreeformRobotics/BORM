@@ -1,0 +1,14 @@
+/b/balcony-interior 0
+/b/bathroom 1
+/b/bedroom 2
+/c/closet 3
+/d/dining_room 4
+/g/garage-indoor 5
+/h/home_office 6 
+/h/home_theater 7
+/k/kitchen 8
+/l/laundromat 9
+/l/living_room 10
+/p/playroom 11
+/s/staircase 12
+/w/wet_bar 13
