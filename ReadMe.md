@@ -4,6 +4,8 @@ The repository is the Pytorch implementation of IROS2021 paper:
 
 "BORM: Bayesian Object Relation Model for Indoor Scene Recognition"
 
+
+
 ## Environment
 
 1. The code has been implemented and tested on Ubuntu 16.04, python 3.6.5, PyTorch 1.1.0 (tested on NVIDIA Titan Xp with CUDA 9.0.176)
@@ -12,6 +14,8 @@ The repository is the Pytorch implementation of IROS2021 paper:
 git@github.com:hszhoushen/borm.git
 ```
 
+
+
 ## Dataset 
 
 1. Places365_7classes: The train/test splits can be found in /data/cenj/places365_train.
@@ -19,6 +23,8 @@ git@github.com:hszhoushen/borm.git
 3. SUNRGBD_7classes: The train/test splits can be found in /data/cenj/SUNRGBD_val. It's used to inference only to test the generaliztion of model.
 
 Update the locations accordingly in the config file.
+
+
 
 ## Prerequisite
 
@@ -30,43 +36,51 @@ To get 150 classes .json file, please enter `/150obj` and run
 
 `python3 train.py --gpus GPUS --cfg config/ade20k-resnet50dilated-ppm_deepsup.yaml`
 
+
+
 ## Training
 
 For the Places365-7 dataset, please execute the following commands
 
 ```
-CUDA_VISIBLE_DEVICES=0 python train_cdopm_resnet50.py  --dataset Places365-7 --num_classes 7 --om_type cdopm_resnet18
+CUDA_VISIBLE_DEVICES=0 python train_cdopm.py  --dataset Places365-7 --num_classes 7 --om_type cdopm_resnet18
 ```
 
 For the Places365-14 dataset, please execute the following commands
 
 ```
-CUDA_VISIBLE_DEVICES=0 python train_cdopm_resnet50.py  --dataset Places365-14 --num_classes 14 --om_type cdopm_resnet50 --batch-size 64 
+CUDA_VISIBLE_DEVICES=0 python train_cdopm.py  --dataset Places365-14 --num_classes 14 --om_type cdopm_resnet50 --batch-size 64 
 ```
+
+
 
 ## Evaluation
 
 For the Places365-7 dataset, please execute the following commands
 
 ```
-CUDA_VISIBLE_DEVICES=0 python test_cdopm_resnet50.py  --dataset Places365-7 --num_classes 7 --om_type cdopm_resnet18
+CUDA_VISIBLE_DEVICES=0 python test_cdopm.py  --dataset Places365-7 --num_classes 7 --om_type cdopm_resnet18
 ```
 
 For the Places365-14 dataset, please execute the following commands
 
 ```
-CUDA_VISIBLE_DEVICES=0 python test_cdopm_resnet50.py  --dataset Places365-14 --num_classes 14 --om_type cdopm_resnet50 --batch-size 64 
+CUDA_VISIBLE_DEVICES=0 python test_cdopm.py  --dataset Places365-14 --num_classes 14 --om_type cdopm_resnet50 --batch-size 64 
 ```
 
 For the SUNRGBD dataset, please execute the following commands 
 
 ```
-CUDA_VISIBLE_DEVICES=0 python test_cdopm_resnet50.py --om_type cdopm_resnet18 --dataset sun --num_classes 7
+CUDA_VISIBLE_DEVICES=0 python test_cdopm.py --om_type cdopm_resnet18 --dataset sun --num_classes 7
 ```
+
+
 
 ## Pre-trained model
 
-Pretrained model is uploaded to the google driver.
+Pretrained model is uploaded to the [google driver](https://drive.google.com/drive/folders/11Hy1DBvdKTFI38g2u_85-wQ00VipUTZY?usp=sharing).
+
+
 
 ## Reference
 
