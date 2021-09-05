@@ -30,11 +30,9 @@ Update the locations accordingly in the config file.
 
 Before training different models, some .json files which contains the object information of your dataset should be obtained. Based on these .json files we don't have to detect object of image when training which will be certainly helpful to speed up training. There are two ways to get .json file including YOLOv3 and Scene parsing model which provide 80 classes and 150 classes dectection result respectively.
 
-To get 80 classes .json file, please run `/yolov3/data_analysis.py`. Please specify your dataset and name of .json file in this python file.
+To get 150 classes .json file, please refer to the scene parsing model from the website https://github.com/CSAILVision/sceneparsing, and we write a json_generate.py based on this repository, plesae go to the line 130 of code json_generate.py to revise the json filename and run the following command.
 
-To get 150 classes .json file, please enter `/150obj` and run
-
-`python3 train.py --gpus GPUS --cfg config/ade20k-resnet50dilated-ppm_deepsup.yaml`
+`python json_generate.py --imgs /data/dataset/Places365-7/`
 
 
 
